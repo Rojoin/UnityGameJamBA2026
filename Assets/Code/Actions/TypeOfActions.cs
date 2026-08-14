@@ -1,4 +1,4 @@
-enum TypeOfActions
+public enum TypeOfActions
 {
 	None,
 	HoldGrab,
