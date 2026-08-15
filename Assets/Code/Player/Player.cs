@@ -53,7 +53,10 @@ namespace Code.Player
 			if (movementInput != Vector2.zero)
 			{
 				Vector3 movementDir = new Vector3(movementInput.x, 0, movementInput.y).normalized * (mouseSensibility * Time.deltaTime);
-				controller.Move(transform.right * movementDir.x + camera.transform.forward * movementDir.z);
+				Vector3 dir = transform.right * movementDir.x + camera.transform.forward * movementDir.z;
+				dir.y = 0;
+				controller.Move(dir);
+				
 			}
 
 			Vector2 inputCamera = cameraMovementInputAction.action.ReadValue<Vector2>();
