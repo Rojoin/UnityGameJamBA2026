@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public sealed class Inventory
 {
@@ -9,7 +10,7 @@ public sealed class Inventory
 
 	public Inventory(IItem hands)
 	{
-		items.Add(hands);
+		Add(hands);
 		selectedIndex = 0;
 	}
 
@@ -26,6 +27,7 @@ public sealed class Inventory
 		}
 
 		items.Add(item);
+		Debug.Log("Item Added " +  item.ItemType);
 	}
 
 	public bool Remove(IItem item)
@@ -35,6 +37,7 @@ public sealed class Inventory
 			return false;
 		}
 
+		Debug.Log("Item Removed " +  item.ItemType);
 		return items.Remove(item);
 	}
 
@@ -51,6 +54,7 @@ public sealed class Inventory
 		{
 			selectedIndex = 0;
 		}
+		Debug.Log("Current selected item " +  items[selectedIndex].GetType().Name);
 	}
 
 	public void SelectPrevious()
@@ -66,6 +70,7 @@ public sealed class Inventory
 		{
 			selectedIndex = items.Count - 1;
 		}
+		Debug.Log("Current selected item " +  items[selectedIndex].GetType().Name);
 	}
 	
 	public void Select(int index)
@@ -76,5 +81,6 @@ public sealed class Inventory
 		}
 
 		selectedIndex = index;
+		Debug.Log("Current selected item " +  items[selectedIndex].GetType().Name);
 	}
 }

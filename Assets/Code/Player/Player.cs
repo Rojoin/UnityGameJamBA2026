@@ -7,10 +7,15 @@ namespace Code.Player
 	[RequireComponent(typeof(CharacterController))]
 	public class Player : MonoBehaviour
 	{
+		private Inventory inventory;
+		[SerializeField] private Hands hands;
+
 		[SerializeField] private InputActionReference movementInputAction;
 		[SerializeField] private InputActionReference cameraMovementInputAction;
 		[SerializeField] private InputActionReference clickInputAction;
 		[SerializeField] private InputActionReference secondClickInputAction;
+		[SerializeField] private InputActionReference inventoryScrollInputAction;
+		
 		[SerializeField] private float movementSpeed = 10f;
 		 [SerializeField] private float mouseSensibility = 10f;
 		private float minAngleX = -90f;
@@ -18,7 +23,6 @@ namespace Code.Player
 		private float xRotation = 0f;
 		private Vector2 movementInput = new Vector2(0, 0);
 		private CharacterController controller;
-
 		private Camera camera;
 
 		private void Awake()
@@ -29,17 +33,45 @@ namespace Code.Player
 			clickInputAction.action.Enable();
 			secondClickInputAction.action.Enable();
 
+			inventory = new Inventory(hands);
+
 			clickInputAction.action.performed += OnPrimaryClick;
 			secondClickInputAction.action.performed += OnSecondaryClick;
+			inventoryScrollInputAction.action.performed += OnInventoryScroll;
 			camera = Camera.main;
 		}
 
 		private void OnSecondaryClick(InputAction.CallbackContext obj)
 		{
+			inventory.GetSelectedItem().SecondaryAction();
 		}
 
 		private void OnPrimaryClick(InputAction.CallbackContext obj)
 		{
+			inventory.GetSelectedItem().PrimaryAction();
+		}
+		
+		private void OnInventoryScroll(InputAction.CallbackContext context)
+		{
+			Vector2 scroll = context.ReadValue<Vector2>();
+
+			Debug.Log(scroll);
+			
+			if (scroll.y > 0f)
+			{
+				inventory.SelectPrevious();
+			}
+			else if (scroll.y < 0f)
+			{
+				inventory.SelectNext();
+			}
+		}
+
+		private void OnInventorySlot(InputAction.CallbackContext context)
+		{
+			int slot = (int)context.ReadValue<float>();
+
+			inventory.Select(slot);
 		}
 
 		private void Update()
@@ -80,6 +112,7 @@ namespace Code.Player
 
 			clickInputAction.action.performed -= OnPrimaryClick;
 			secondClickInputAction.action.performed -= OnSecondaryClick;
+			inventoryScrollInputAction.action.performed -= OnInventoryScroll;
 		}
 	}
 }
