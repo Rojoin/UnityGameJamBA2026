@@ -4,6 +4,15 @@ namespace Code.Actions
 	{
 		public override ItemType ItemType => ItemType.Scissors;
 
+		public override void Activate()
+		{
+
+		}
+		public override void Deactivate()
+		{
+
+		}
+		
 		public override void PrimaryAction()
 		{
 

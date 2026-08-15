@@ -1,6 +1,14 @@
 public class Hands : Item
 {
 	public override ItemType ItemType => ItemType.Hands;
+	public override void Activate()
+	{
+
+	}
+	public override void Deactivate()
+	{
+
+	}
 
 	public override void PrimaryAction()
 	{
