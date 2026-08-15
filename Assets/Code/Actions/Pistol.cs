@@ -22,12 +22,12 @@ public sealed class Pistol : Item
 	
 	public override void Activate()
 	{
-		
+		gameObject.SetActive(true);
 	}
 	
 	public override void Deactivate()
 	{
-
+		gameObject.SetActive(false);
 	}
 
 	public override void PrimaryAction()
