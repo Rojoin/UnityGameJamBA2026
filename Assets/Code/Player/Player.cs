@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Code.Player
 {
@@ -12,7 +11,7 @@ namespace Code.Player
 		[SerializeField] private Hands hands;
 
 		//TODO: SACAR ESTO PORQUE LA PISTOLA SE RECOGE
-		//[SerializeField] private Pistol pistol;
+		//[SerializeField] private Rock rock;
 
 		[SerializeField] private InputActionReference movementInputAction;
 		[SerializeField] private InputActionReference cameraMovementInputAction;
@@ -40,7 +39,7 @@ namespace Code.Player
 
 			inventory = new Inventory(hands);
 			//TODO: SACAR ESTO PORQUE LA PISTOLA SE RECOGE
-			//inventory.Add(pistol);
+			//inventory.Add(rock);
 
 			clickInputAction.action.performed += OnPrimaryClick;
 			secondClickInputAction.action.performed += OnSecondaryClick;
