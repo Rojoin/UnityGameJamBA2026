@@ -19,5 +19,6 @@ public class NextLevelTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _levelManager.NextLevel();
+        gameObject.SetActive(false);
     }
 }

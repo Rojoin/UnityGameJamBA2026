@@ -16,12 +16,16 @@ public struct Level
     {
         foreach (GameObject gameObject in _goToDeactivate)
         {
-            gameObject.SetActive(false);
+            if (gameObject == null)
+                Debug.LogError("Garbage gameobject found in objects to deactivate.");
+            gameObject?.SetActive(false);
         }
 
         foreach (GameObject gameObject in _goToActivate)
         {
-            gameObject.SetActive(true);
+            if (gameObject == null)
+                Debug.LogError("Garbage gameobject found in objects to activate.");
+            gameObject?.SetActive(true);
         }
     }
 }
