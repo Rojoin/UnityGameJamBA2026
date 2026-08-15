@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Code.Player
-{ 
+{
 	[RequireComponent(typeof(CharacterController))]
 	public class Player : MonoBehaviour
 	{
@@ -12,10 +13,15 @@ namespace Code.Player
 		[SerializeField] private InputActionReference clickInputAction;
 		[SerializeField] private InputActionReference secondClickInputAction;
 		[SerializeField] private float movementSpeed = 10f;
-		private Vector2 movementInput = new Vector2(0,0);
+		[FormerlySerializedAs("movementSensibility")] [SerializeField] private float mouseSensibility = 10f;
+		private float minAngleX = -90f;
+		private float maxAngleX = 90f;
+		private float xRotation = 0f;
+		private Vector2 movementInput = new Vector2(0, 0);
 		private CharacterController controller;
 
 		private Camera camera;
+
 		private void Awake()
 		{
 			controller = GetComponent<CharacterController>();
@@ -31,12 +37,10 @@ namespace Code.Player
 
 		private void OnSecondaryClick(InputAction.CallbackContext obj)
 		{
-			
 		}
 
 		private void OnPrimaryClick(InputAction.CallbackContext obj)
 		{
-			
 		}
 
 		private void Update()
@@ -49,14 +53,19 @@ namespace Code.Player
 
 			if (movementInput != Vector2.zero)
 			{
-				controller.Move( new Vector3(movementInput.x, 0, movementInput.y) * (movementSpeed * Time.deltaTime) );
+				Vector3 movementDir = new Vector3(movementInput.x, 0, movementInput.y).normalized * (mouseSensibility * Time.deltaTime);
+				controller.Move(transform.right * movementDir.x + camera.transform.forward * movementDir.z);
 			}
 
-			if (cameraMovementInputAction.action.ReadValue<Vector2>() != Vector2.zero)
+			Vector2 inputCamera = cameraMovementInputAction.action.ReadValue<Vector2>();
+			if (inputCamera != Vector2.zero)
 			{
-
-				Vector2 inputDir;
-				camera.transform.rotation = Quaternion.Euler(cameraMovementInputAction.action.ReadValue<Vector2>().x, 0, 0);
+				Vector2 inputDir = inputCamera;
+				inputDir *= mouseSensibility * Time.deltaTime;
+				xRotation -= inputCamera.y;
+				xRotation = Mathf.Clamp(xRotation, minAngleX, maxAngleX);
+				transform.Rotate(Vector3.up * inputDir.x);
+				camera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 			}
 		}
 
@@ -66,7 +75,7 @@ namespace Code.Player
 			cameraMovementInputAction.action.Disable();
 			clickInputAction.action.Disable();
 			secondClickInputAction.action.Disable();
-			
+
 			clickInputAction.action.performed -= OnPrimaryClick;
 			secondClickInputAction.action.performed -= OnSecondaryClick;
 		}
