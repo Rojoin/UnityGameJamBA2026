@@ -8,16 +8,20 @@ namespace Code.Player
 	public class Player : MonoBehaviour
 	{
 		private Inventory inventory;
+
 		[SerializeField] private Hands hands;
+
+		//TODO: SACAR ESTO PORQUE LA PISTOLA SE RECOGE
+		//[SerializeField] private Pistol pistol;
 
 		[SerializeField] private InputActionReference movementInputAction;
 		[SerializeField] private InputActionReference cameraMovementInputAction;
 		[SerializeField] private InputActionReference clickInputAction;
 		[SerializeField] private InputActionReference secondClickInputAction;
 		[SerializeField] private InputActionReference inventoryScrollInputAction;
-		
+
 		[SerializeField] private float movementSpeed = 10f;
-		 [SerializeField] private float mouseSensibility = 10f;
+		[SerializeField] private float mouseSensibility = 10f;
 		private float minAngleX = -90f;
 		private float maxAngleX = 90f;
 		private float xRotation = 0f;
@@ -32,8 +36,11 @@ namespace Code.Player
 			cameraMovementInputAction.action.Enable();
 			clickInputAction.action.Enable();
 			secondClickInputAction.action.Enable();
+			inventoryScrollInputAction.action.Enable();
 
 			inventory = new Inventory(hands);
+			//TODO: SACAR ESTO PORQUE LA PISTOLA SE RECOGE
+			//inventory.Add(pistol);
 
 			clickInputAction.action.performed += OnPrimaryClick;
 			secondClickInputAction.action.performed += OnSecondaryClick;
@@ -50,13 +57,11 @@ namespace Code.Player
 		{
 			inventory.GetSelectedItem().PrimaryAction();
 		}
-		
+
 		private void OnInventoryScroll(InputAction.CallbackContext context)
 		{
 			Vector2 scroll = context.ReadValue<Vector2>();
 
-			Debug.Log(scroll);
-			
 			if (scroll.y > 0f)
 			{
 				inventory.SelectPrevious();
@@ -88,7 +93,6 @@ namespace Code.Player
 				Vector3 dir = transform.right * movementDir.x + camera.transform.forward * movementDir.z;
 				dir.y = 0;
 				controller.Move(dir);
-				
 			}
 
 			Vector2 inputCamera = cameraMovementInputAction.action.ReadValue<Vector2>();
