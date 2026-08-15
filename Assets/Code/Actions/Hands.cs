@@ -1,4 +1,4 @@
-public sealed class Hands : Item
+public class Hands : Item
 {
 	public override ItemType ItemType => ItemType.Hands;
 
