@@ -12,6 +12,8 @@ public sealed class Inventory
 	{
 		Add(hands);
 		selectedIndex = 0;
+
+		items[0].Activate();
 	}
 
 	public IItem GetSelectedItem()
@@ -26,8 +28,10 @@ public sealed class Inventory
 			return;
 		}
 
+		item.Deactivate();
 		items.Add(item);
-		Debug.Log("Item Added " +  item.ItemType);
+
+		Debug.Log("Item Added " + item.ItemType);
 	}
 
 	public bool Remove(IItem item)
@@ -37,8 +41,28 @@ public sealed class Inventory
 			return false;
 		}
 
-		Debug.Log("Item Removed " +  item.ItemType);
-		return items.Remove(item);
+		int index = items.IndexOf(item);
+
+		if (index < 0)
+		{
+			return false;
+		}
+
+		if (index == selectedIndex)
+		{
+			item.Deactivate();
+		}
+
+		items.RemoveAt(index);
+
+		if (selectedIndex >= items.Count)
+		{
+			selectedIndex = items.Count - 1;
+		}
+
+		Debug.Log("Item Removed " + item.ItemType);
+
+		return true;
 	}
 
 	public void SelectNext()
@@ -48,13 +72,14 @@ public sealed class Inventory
 			return;
 		}
 
-		selectedIndex++;
+		int nextIndex = selectedIndex + 1;
 
-		if (selectedIndex >= items.Count)
+		if (nextIndex >= items.Count)
 		{
-			selectedIndex = 0;
+			nextIndex = 0;
 		}
-		Debug.Log("Current selected item " +  items[selectedIndex].GetType().Name);
+
+		Select(nextIndex);
 	}
 
 	public void SelectPrevious()
@@ -64,23 +89,29 @@ public sealed class Inventory
 			return;
 		}
 
-		selectedIndex--;
+		int previousIndex = selectedIndex - 1;
 
-		if (selectedIndex < 0)
+		if (previousIndex < 0)
 		{
-			selectedIndex = items.Count - 1;
+			previousIndex = items.Count - 1;
 		}
-		Debug.Log("Current selected item " +  items[selectedIndex].GetType().Name);
+
+		Select(previousIndex);
 	}
-	
+
 	public void Select(int index)
 	{
-		if (index < 0 || index >= items.Count)
+		if (index < 0 || index >= items.Count || index == selectedIndex)
 		{
 			return;
 		}
 
+		items[selectedIndex].Deactivate();
+
 		selectedIndex = index;
-		Debug.Log("Current selected item " +  items[selectedIndex].GetType().Name);
+
+		items[selectedIndex].Activate();
+
+		Debug.Log("Current selected item " + items[selectedIndex].GetType().Name);
 	}
 }

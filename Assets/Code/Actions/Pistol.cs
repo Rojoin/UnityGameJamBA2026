@@ -22,7 +22,7 @@ public sealed class Pistol : Item
 	
 	public override void Activate()
 	{
-
+		
 	}
 	
 	public override void Deactivate()
