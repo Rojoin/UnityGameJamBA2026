@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -13,7 +12,7 @@ namespace Code.Player
 		[SerializeField] private InputActionReference clickInputAction;
 		[SerializeField] private InputActionReference secondClickInputAction;
 		[SerializeField] private float movementSpeed = 10f;
-		[FormerlySerializedAs("movementSensibility")] [SerializeField] private float mouseSensibility = 10f;
+		 [SerializeField] private float mouseSensibility = 10f;
 		private float minAngleX = -90f;
 		private float maxAngleX = 90f;
 		private float xRotation = 0f;
