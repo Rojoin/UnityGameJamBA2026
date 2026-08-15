@@ -1,20 +1,29 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Rock : Item
+public sealed class Rock : Item
 {
 	[SerializeField] private Transform hand;
+	[SerializeField] private Transform throwPosition;
 	[SerializeField] private float throwForce = 20f;
-	[SerializeField] private float returnSpeed = 15f;
-	
+
 	private Rigidbody rigidbody;
 	private bool isThrown;
-	
+
 	public override ItemType ItemType => ItemType.Rock;
-	
+
 	private void Awake()
 	{
 		rigidbody = GetComponent<Rigidbody>();
+	}
+	
+	public override void Activate()
+	{
+
+	}
+	public override void Deactivate()
+	{
+
 	}
 
 	public override void PrimaryAction()
@@ -27,14 +36,16 @@ public class Rock : Item
 		isThrown = true;
 
 		transform.SetParent(null);
+		transform.position = throwPosition.position;
 
 		rigidbody.isKinematic = false;
 		rigidbody.linearVelocity = Vector3.zero;
 		rigidbody.angularVelocity = Vector3.zero;
 
-		Vector3 direction = hand.forward;
-
-		rigidbody.AddForce(direction * throwForce, ForceMode.Impulse);
+		rigidbody.AddForce(
+			throwPosition.forward * throwForce,
+			ForceMode.Impulse
+		);
 	}
 
 	public override void SecondaryAction()

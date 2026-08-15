@@ -19,6 +19,16 @@ public sealed class Pistol : Item
 	{
 		currentAmmo = clipSize;
 	}
+	
+	public override void Activate()
+	{
+
+	}
+	
+	public override void Deactivate()
+	{
+
+	}
 
 	public override void PrimaryAction()
 	{
