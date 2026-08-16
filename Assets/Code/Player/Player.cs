@@ -20,7 +20,8 @@ namespace Code.Player
 		[SerializeField] private InputActionReference inventoryScrollInputAction;
 
 		[SerializeField] private float movementSpeed = 10f;
-		[SerializeField] private float mouseSensibility = 10f;
+		[SerializeField] private float mouseSensibilityX = 50f;
+		[SerializeField] private float mouseSensibilityY = 0.2f;
 		private float minAngleX = -90f;
 		private float maxAngleX = 90f;
 		private float xRotation = 0f;
@@ -31,6 +32,8 @@ namespace Code.Player
 		private void Awake()
 		{
 			controller = GetComponent<CharacterController>();
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
 			movementInputAction.action.Enable();
 			cameraMovementInputAction.action.Enable();
 			clickInputAction.action.Enable();
@@ -88,7 +91,7 @@ namespace Code.Player
 
 			if (movementInput != Vector2.zero)
 			{
-				Vector3 movementDir = new Vector3(movementInput.x, 0, movementInput.y).normalized * (mouseSensibility * Time.deltaTime);
+				Vector3 movementDir = new Vector3(movementInput.x, 0, movementInput.y).normalized * (movementSpeed * Time.deltaTime);
 				Vector3 dir = transform.right * movementDir.x + camera.transform.forward * movementDir.z;
 				dir.y = 0;
 				controller.Move(dir);
@@ -98,10 +101,10 @@ namespace Code.Player
 			if (inputCamera != Vector2.zero)
 			{
 				Vector2 inputDir = inputCamera;
-				inputDir *= mouseSensibility * Time.deltaTime;
-				xRotation -= inputCamera.y;
+				inputDir *=  Time.deltaTime;
+				xRotation -= inputCamera.y * mouseSensibilityY;
 				xRotation = Mathf.Clamp(xRotation, minAngleX, maxAngleX);
-				transform.Rotate(Vector3.up * inputDir.x);
+				transform.Rotate(Vector3.up * (inputDir.x * mouseSensibilityX));
 				camera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 			}
 		}
