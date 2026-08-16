@@ -42,8 +42,18 @@ public class Hands : Item
 		
 	}
 
-	public override void SecondaryAction()
+    public override void PrimaryActionReleased()
+    {
+
+    }
+
+    public override void SecondaryAction()
 	{
 		// Drop or throw held object
 	}
+
+    public override void SecondaryActionReleased()
+    {
+
+    }
 }

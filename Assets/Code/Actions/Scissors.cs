@@ -18,9 +18,17 @@ namespace Code.Actions
 
 		}
 
-		public override void SecondaryAction()
+        public override void PrimaryActionReleased()
+        {
+        }
+
+        public override void SecondaryAction()
 		{
 
 		}
-	}
+
+        public override void SecondaryActionReleased()
+        {
+        }
+    }
 }

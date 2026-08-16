@@ -112,4 +112,14 @@ public sealed class Rock : Item
 		transform.localPosition = Vector3.zero;
 		transform.localRotation = Quaternion.identity;
 	}
+
+    public override void PrimaryActionReleased()
+    {
+
+    }
+
+    public override void SecondaryActionReleased()
+    {
+
+    }
 }
