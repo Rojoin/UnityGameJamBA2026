@@ -9,7 +9,9 @@ public sealed class Pistol : Item
 	[SerializeField] private float shootTime = 0.2f;
 	[SerializeField] private float reloadTime = 1f;
 	[SerializeField] private float range = 100f;
+	[SerializeField] private float damage = 10f;
 	[SerializeField] private Transform shootPosition;
+	[SerializeField] private GameObject pistolVisual;
 
 	private int currentAmmo;
 	private float nextShootTime;
@@ -18,16 +20,17 @@ public sealed class Pistol : Item
 	private void Awake()
 	{
 		currentAmmo = clipSize;
+		pistolVisual.SetActive(false);
 	}
-	
+
 	public override void Activate()
 	{
-		gameObject.SetActive(true);
+		pistolVisual.SetActive(true);
 	}
-	
+
 	public override void Deactivate()
 	{
-		gameObject.SetActive(false);
+		pistolVisual.SetActive(false);
 	}
 
 	public override void PrimaryAction()
@@ -70,7 +73,13 @@ public sealed class Pistol : Item
 			return;
 		}
 
-		Debug.Log("Hit: " + hit.collider.name);
+		IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+
+		if (damageable != null)
+		{
+			damageable.TakeDamage(damage);
+			Debug.Log("Hit: " + hit.collider.name);
+		}
 	}
 
 	private void StartReload()
@@ -97,16 +106,11 @@ public sealed class Pistol : Item
 		Debug.Log("Reload complete");
 	}
 
-    public override void PrimaryActionReleased()
-    {
-    }
+	public override void PrimaryActionReleased() { }
 
-    public override void SecondaryActionReleased()
-    {
-    }
-
+	public override void SecondaryActionReleased() { }
+    
     public override void Release()
     {
-        throw new System.NotImplementedException();
     }
 }
