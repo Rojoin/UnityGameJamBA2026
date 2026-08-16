@@ -81,7 +81,7 @@ public sealed class Scissors : Item
 		isAttacking = false;
 	}
     
-    public override void Release
+    public override void Release()
     {
         
     }
