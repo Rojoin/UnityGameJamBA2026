@@ -120,5 +120,10 @@ namespace Code.Player
 			secondClickInputAction.action.performed -= OnSecondaryClick;
 			inventoryScrollInputAction.action.performed -= OnInventoryScroll;
 		}
+
+		public IItem GetSelectedItem()
+		{
+			return inventory.GetSelectedItem();
+		}
 	}
 }

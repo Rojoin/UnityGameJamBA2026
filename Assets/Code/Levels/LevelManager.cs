@@ -28,8 +28,8 @@ public class LevelManager : MonoBehaviour
 
         if (_idLevels.ContainsKey(_currentLevel))
             _idLevels[_startLevelID].OnEnter();
-        else
-            Debug.LogError($"There's no first level of ID {_startLevelID}");
+        //else
+        //    Debug.LogError($"There's no first level of ID {_startLevelID}");
     }
 
     public void NextLevel()
