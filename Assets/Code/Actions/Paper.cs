@@ -20,10 +20,13 @@ public class Paper : Item
 
     }
 
+    public override void Release()
+    {
+    }
     public override void SecondaryAction()
-	{
+    {
 
-	}
+    }
 
     public override void SecondaryActionReleased()
     {

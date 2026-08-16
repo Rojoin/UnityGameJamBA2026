@@ -104,4 +104,9 @@ public sealed class Pistol : Item
     public override void SecondaryActionReleased()
     {
     }
+
+    public override void Release()
+    {
+        throw new System.NotImplementedException();
+    }
 }

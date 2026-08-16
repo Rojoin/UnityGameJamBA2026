@@ -22,6 +22,11 @@ public class Shield : Item
 
     }
 
+    public override void Release()
+    {
+
+    }
+
     public override void SecondaryAction()
     {
 

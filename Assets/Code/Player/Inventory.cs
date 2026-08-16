@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,11 +31,17 @@ public sealed class Inventory
 
 		item.Deactivate();
 		items.Add(item);
+		item.OnItemReleased += OnItemReleased;
 
 		Debug.Log("Item Added " + item.ItemType);
 	}
 
-	public bool Remove(IItem item)
+    private void OnItemReleased(IItem item)
+    {
+		Remove(item);
+    }
+
+    public bool Remove(IItem item)
 	{
 		if (item == null || item == items[0])
 		{

@@ -22,6 +22,10 @@ namespace Code.Actions
         {
         }
 
+        public override void Release()
+        {
+        }
+
         public override void SecondaryAction()
 		{
 
