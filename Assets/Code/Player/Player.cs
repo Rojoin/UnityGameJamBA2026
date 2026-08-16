@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,20 +41,33 @@ namespace Code.Player
 			secondClickInputAction.action.Enable();
 			inventoryScrollInputAction.action.Enable();
 
+			hands.SetPlayer(this);
 			inventory = new Inventory(hands);
 			//TODO: SACAR ESTO PORQUE LA PISTOLA SE RECOGE
 			//inventory.Add(rock);
 
-			clickInputAction.action.performed += OnPrimaryClick;
-			secondClickInputAction.action.performed += OnSecondaryClick;
-			inventoryScrollInputAction.action.performed += OnInventoryScroll;
-			camera = Camera.main;
-		}
+            clickInputAction.action.performed += OnPrimaryClick;
+            clickInputAction.action.canceled += OnPrimaryClickReleased;
+            secondClickInputAction.action.performed += OnSecondaryClick;
+            secondClickInputAction.action.canceled += OnSecondaryClickReleased;
+            inventoryScrollInputAction.action.performed += OnInventoryScroll;
+            camera = Camera.main;
+        }
 
-		private void OnSecondaryClick(InputAction.CallbackContext obj)
-		{
-			inventory.GetSelectedItem().SecondaryAction();
-		}
+        private void OnSecondaryClickReleased(InputAction.CallbackContext context)
+        {
+            inventory.GetSelectedItem().SecondaryActionReleased();
+        }
+
+        private void OnPrimaryClickReleased(InputAction.CallbackContext context)
+        {
+            inventory.GetSelectedItem().PrimaryActionReleased();
+        }
+
+        private void OnSecondaryClick(InputAction.CallbackContext obj)
+        {
+            inventory.GetSelectedItem().SecondaryAction();
+        }
 
 		private void OnPrimaryClick(InputAction.CallbackContext obj)
 		{
@@ -109,6 +123,14 @@ namespace Code.Player
 			}
 		}
 
+		public void AddItemToInventory(Item item)
+		{
+			item.SetPlayer(this);
+			inventory.Add(item);
+			item.transform.SetParent(camera.transform);
+			item.transform.localPosition = Vector3.zero;
+		}
+
 		private void OnDestroy()
 		{
 			movementInputAction.action.Disable();
@@ -116,9 +138,14 @@ namespace Code.Player
 			clickInputAction.action.Disable();
 			secondClickInputAction.action.Disable();
 
-			clickInputAction.action.performed -= OnPrimaryClick;
-			secondClickInputAction.action.performed -= OnSecondaryClick;
-			inventoryScrollInputAction.action.performed -= OnInventoryScroll;
-		}
-	}
+            clickInputAction.action.performed -= OnPrimaryClick;
+            secondClickInputAction.action.performed -= OnSecondaryClick;
+            inventoryScrollInputAction.action.performed -= OnInventoryScroll;
+        }
+
+        public IItem GetSelectedItem()
+        {
+            return inventory.GetSelectedItem();
+        }
+    }
 }
