@@ -96,4 +96,12 @@ public sealed class Pistol : Item
 
 		Debug.Log("Reload complete");
 	}
+
+    public override void PrimaryActionReleased()
+    {
+    }
+
+    public override void SecondaryActionReleased()
+    {
+    }
 }

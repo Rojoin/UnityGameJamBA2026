@@ -69,7 +69,8 @@ public sealed class Inventory
 	{
 		if (items.Count <= 1)
 		{
-			return;
+            Debug.Log("No items to select next to this one");
+            return;
 		}
 
 		int nextIndex = selectedIndex + 1;
@@ -86,6 +87,7 @@ public sealed class Inventory
 	{
 		if (items.Count <= 1)
 		{
+			Debug.Log("No items to select previous to this one");
 			return;
 		}
 

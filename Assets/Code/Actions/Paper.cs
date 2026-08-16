@@ -15,8 +15,18 @@ public class Paper : Item
 
 	}
 
-	public override void SecondaryAction()
+    public override void PrimaryActionReleased()
+    {
+
+    }
+
+    public override void SecondaryAction()
 	{
 
 	}
+
+    public override void SecondaryActionReleased()
+    {
+
+    }
 }

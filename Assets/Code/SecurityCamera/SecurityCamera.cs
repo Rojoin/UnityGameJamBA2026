@@ -42,7 +42,7 @@ public class SecurityCamera : MonoBehaviour
     private float detectionTimer;
     private bool isTrackingPlayer;
 
-    private bool isPlayerDisguised => player.GetSelectedItem() is Box;
+    private bool isPlayerDisguised => player.GetSelectedItem() is Box && (player.GetSelectedItem() as Box).isDisguised;
 
     public Action OnPlayerDetected;
 
