@@ -40,6 +40,7 @@ namespace Code.Player
 			secondClickInputAction.action.Enable();
 			inventoryScrollInputAction.action.Enable();
 
+			hands.SetPlayer(this);
 			inventory = new Inventory(hands);
 			//TODO: SACAR ESTO PORQUE LA PISTOLA SE RECOGE
 			//inventory.Add(rock);
@@ -107,6 +108,14 @@ namespace Code.Player
 				transform.Rotate(Vector3.up * (inputDir.x * mouseSensibilityX));
 				camera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 			}
+		}
+
+		public void AddItemToInventory(Item item)
+		{
+			item.SetPlayer(this);
+			inventory.Add(item);
+			item.transform.SetParent(camera.transform);
+			item.transform.localPosition = Vector3.zero;
 		}
 
 		private void OnDestroy()

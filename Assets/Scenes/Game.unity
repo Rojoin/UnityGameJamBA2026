@@ -4516,7 +4516,7 @@ GameObject:
   - component: {fileID: 1561884074}
   - component: {fileID: 1561884073}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4541,7 +4541,8 @@ MonoBehaviour:
   secondClickInputAction: {fileID: -4604432227711350628, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   inventoryScrollInputAction: {fileID: -3228071692495776190, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   movementSpeed: 10
-  mouseSensibility: 10
+  mouseSensibilityX: 50
+  mouseSensibilityY: 0.2
 --- !u!143 &1561884074
 CharacterController:
   m_ObjectHideFlags: 0
