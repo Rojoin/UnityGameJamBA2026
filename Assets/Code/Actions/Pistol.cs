@@ -109,4 +109,8 @@ public sealed class Pistol : Item
 	public override void PrimaryActionReleased() { }
 
 	public override void SecondaryActionReleased() { }
+    
+    public override void Release()
+    {
+    }
 }

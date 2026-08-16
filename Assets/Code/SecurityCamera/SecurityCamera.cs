@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class SecurityCamera : MonoBehaviour
+public class SecurityCamera : MonoBehaviour, ICoverable
 {
     [Header("Player Detection")]
     [SerializeField] private Player player;
@@ -44,7 +44,7 @@ public class SecurityCamera : MonoBehaviour
 
     private bool isPlayerDisguised => player.GetSelectedItem() is Box && (player.GetSelectedItem() as Box).isDisguised;
 
-    public Action OnPlayerDetected;
+    public event Action OnPlayerDetected;
 
     private void Awake()
     {
@@ -87,16 +87,13 @@ public class SecurityCamera : MonoBehaviour
         {
             float distance = detectionRange * ring / rings;
 
-            float radius =
-                Mathf.Tan(detectionAngle * 0.5f * Mathf.Deg2Rad) * distance;
+            float radius = Mathf.Tan(detectionAngle * 0.5f * Mathf.Deg2Rad) * distance;
 
             for (int i = 0; i < rays; i++)
             {
                 float angle = i * 360f / rays;
 
-                Vector3 offset =
-                    cameraOrigin.right * Mathf.Cos(angle * Mathf.Deg2Rad) * radius +
-                    cameraOrigin.up * Mathf.Sin(angle * Mathf.Deg2Rad) * radius;
+                Vector3 offset =  cameraOrigin.right * Mathf.Cos(angle * Mathf.Deg2Rad) * radius + cameraOrigin.up * Mathf.Sin(angle * Mathf.Deg2Rad) * radius;
 
                 Gizmos.DrawLine(origin, origin + cameraOrigin.forward * distance + offset);
             }
@@ -229,10 +226,10 @@ public class SecurityCamera : MonoBehaviour
         cameraRotator.transform.localRotation = targetRot;
     }
 
-    //is covered with paper
     public void Cover()
     {
         isCovered = true;
+        detectionLight.gameObject.SetActive(false);
     }
 
     private bool CanSeePlayer()
@@ -270,4 +267,10 @@ public class SecurityCamera : MonoBehaviour
 
         return angle <= detectionAngle * 0.5f;
     }
+}
+
+
+public interface ICoverable
+{
+    void Cover();
 }

@@ -34,6 +34,11 @@ public class Box : Item
         isDisguised = false;
     }
 
+    public override void Release()
+    {
+
+    }
+
     public override void SecondaryAction()
 	{
 

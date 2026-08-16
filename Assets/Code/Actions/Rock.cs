@@ -122,4 +122,9 @@ public sealed class Rock : Item
     {
 
     }
+
+    public override void Release()
+    {
+
+    }
 }
