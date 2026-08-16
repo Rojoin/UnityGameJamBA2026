@@ -442,12 +442,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155466290}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.76, y: 2.37, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0000000018626451, w: 1}
+  m_LocalPosition: {x: 0.760002, y: 2.3700001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1048716735}
+  m_Father: {fileID: 169813043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &155466292
 BoxCollider:
@@ -527,6 +527,74 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155466290}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &169813042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 169813043}
+  - component: {fileID: 169813045}
+  - component: {fileID: 169813044}
+  m_Layer: 0
+  m_Name: Rotator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &169813043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169813042}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.78, y: 0.06, z: 0.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1900662322}
+  - {fileID: 155466291}
+  m_Father: {fileID: 1048716735}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &169813044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169813042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4576486ab620ef247b244fd546c8346a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileDetector
+--- !u!135 &169813045
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169813042}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5066953
+  m_Center: {x: 0.41455662, y: 1.6638517, z: -0.000000043436764}
 --- !u!1 &218734208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,6 +2483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048716735}
+  - component: {fileID: 1048716736}
   m_Layer: 0
   m_Name: camera
   m_TagString: Untagged
@@ -2430,15 +2499,34 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048716734}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.035438016, y: 0.43408343, z: -0.12597108, w: 0.89131755}
-  m_LocalPosition: {x: -16.14684, y: 8.787777, z: 46.58728}
+  m_LocalRotation: {x: -0.055525217, y: 0.3268002, z: -0.15803458, w: 0.930131}
+  m_LocalPosition: {x: -16.387072, y: 9.019446, z: 47.128113}
   m_LocalScale: {x: 1.3454863, y: 0.6423284, z: 0.9167989}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1900662322}
-  - {fileID: 155466291}
+  - {fileID: 169813043}
   m_Father: {fileID: 1864838465}
-  m_LocalEulerAnglesHint: {x: 9.935, y: 50.944, z: -11.347}
+  m_LocalEulerAnglesHint: {x: 0, y: 38.718, z: -19.286}
+--- !u!114 &1048716736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048716734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff42401ac5f979d42811e6329ae0986e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SecurityCamera
+  _projectileDetector: {fileID: 169813044}
+  _cameraRotator: {fileID: 169813042}
+  _scanMaxAngle: 45
+  _scanPauseTime: 1
+  _scanDuration: 3
+  _dodgeMaxAngle: 45
+  _dodgePauseTime: 0.4
+  _dodgeDuration: 0.2
 --- !u!1 &1094119978
 GameObject:
   m_ObjectHideFlags: 0
@@ -5372,12 +5460,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900662321}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00000009313224, y: 0.000000029802319, z: -0.2879466, w: 0.9576465}
-  m_LocalPosition: {x: -0.1499967, y: 1.2000017, z: -0.0000032689788}
-  m_LocalScale: {x: 0.54058, y: 2.8015, z: 0.55806}
+  m_LocalRotation: {x: 0.00000008754432, y: 0.000000029802322, z: -0.2879466, w: 0.9576465}
+  m_LocalPosition: {x: -0.14999765, y: 1.2000024, z: 0}
+  m_LocalScale: {x: 0.54058, y: 2.8015003, z: 0.55806005}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1048716735}
+  m_Father: {fileID: 169813043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -33.47}
 --- !u!65 &1900662323
 BoxCollider:
