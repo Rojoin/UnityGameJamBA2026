@@ -1,3 +1,4 @@
+using Code.Player;
 using UnityEngine;
 
 public enum ItemType
@@ -32,4 +33,10 @@ public abstract class Item : MonoBehaviour, IItem
 	
 	public abstract void PrimaryAction();
 	public abstract void SecondaryAction();
+	protected Player player;
+
+	public void SetPlayer(Player player)
+	{
+		this.player = player;
+	}
 }
