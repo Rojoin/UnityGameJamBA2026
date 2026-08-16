@@ -2,7 +2,6 @@ using UnityEngine;
 
 public sealed class Scissors : Item
 {
-	[SerializeField] private Transform hand;
 	[SerializeField] private GameObject scissorsVisual;
 	[SerializeField] private SphereCollider attackCollider;
 	[SerializeField] private float attackDuration = 0.1f;
@@ -23,10 +22,6 @@ public sealed class Scissors : Item
 	public override void Activate()
 	{
 		scissorsVisual.SetActive(true);
-
-		transform.SetParent(hand);
-		transform.localPosition = Vector3.zero;
-		transform.localRotation = Quaternion.identity;
 	}
 
 	public override void Deactivate()
