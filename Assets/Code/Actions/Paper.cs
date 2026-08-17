@@ -6,6 +6,7 @@ public class Paper : Item
 {
     [SerializeField] Transform hand;
     [SerializeField] GameObject paperGO;
+    [SerializeField] GameObject airplaneGO;
     [SerializeField] float coverRange;
     [SerializeField] Transform playerViewOrigin;
     [SerializeField] bool drawRangeGizmos;
@@ -15,6 +16,10 @@ public class Paper : Item
     public override void Activate()
     {
         paperGO.SetActive(true);
+        airplaneGO.SetActive(false);
+        airplaneGO.transform.SetParent(hand);
+        airplaneGO.transform.localPosition = Vector3.zero;
+        airplaneGO.transform.localRotation = Quaternion.identity;
         paperGO.transform.SetParent(hand);
         paperGO.transform.localPosition = Vector3.zero;
         paperGO.transform.localRotation = Quaternion.identity;
@@ -27,6 +32,7 @@ public class Paper : Item
 
     public override void PrimaryAction()
     {
+
         if (CoverObject())
             Release();
     }
@@ -53,6 +59,17 @@ public class Paper : Item
         return false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<ICoverable>(out var coverable) ||
+            other.transform.parent.parent.TryGetComponent<ICoverable>(out coverable))
+        {
+            coverable.Cover();
+            Debug.Log($"Covering object {coverable}");
+            Release();
+        }
+    }
+
     public override void PrimaryActionReleased()
     {
 
@@ -67,7 +84,9 @@ public class Paper : Item
 
     public override void SecondaryAction()
     {
+        paperGO.SetActive(false);
 
+        airplaneGO.SetActive(true);
     }
 
     public override void SecondaryActionReleased()
