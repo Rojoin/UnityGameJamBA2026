@@ -44,8 +44,6 @@ public class SecurityCamera : PlayerRespawnable, ICoverable
 
     private bool isPlayerDisguised => player.GetSelectedItem() is Box && (player.GetSelectedItem() as Box).isDisguised;
 
-    public Action OnPlayerRespawnCondition { get; set; }
-
     private void Awake()
     {
         if (cameraRotator == null)
@@ -122,7 +120,7 @@ public class SecurityCamera : PlayerRespawnable, ICoverable
                 Debug.Log("Camera sees player");
             }
 
-            if (detectionTimer >= detectionDelay && wasSeeingPlayer)
+            if (detectionTimer >= detectionDelay && !wasSeeingPlayer)
             {
                 wasSeeingPlayer = true;
                 OnPlayerRespawnCondition?.Invoke();
