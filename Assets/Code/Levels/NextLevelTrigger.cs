@@ -18,7 +18,7 @@ public class NextLevelTrigger : MonoBehaviour
         _boxCollider.isTrigger = true; 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (!CanPassLevel())
             return;
@@ -31,6 +31,9 @@ public class NextLevelTrigger : MonoBehaviour
     {
         foreach (LevelCondition level in _levelConditions)
         {
+            if (level.PassedLevel())
+                return false;
+
             if (!level.CanPassLevel())
                 return false;
         }

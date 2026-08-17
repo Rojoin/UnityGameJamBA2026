@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class Bomb : MonoBehaviour
+public sealed class Bomb : PlayerRespawnable
 {
 	[SerializeField] private float countdown = 10f;
 	[SerializeField] private List<BombCable> cables = new List<BombCable>();
@@ -60,7 +60,7 @@ public sealed class Bomb : MonoBehaviour
 
 	private void OnCableCut(BombCable cable)
 	{
-		if (!isActive || IsDefused)
+		if (!isActive || isDefused)
 		{
 			return;
 		}
@@ -91,5 +91,7 @@ public sealed class Bomb : MonoBehaviour
 		isActive = false;
 
 		Debug.Log("Bomb exploded");
+
+		OnPlayerRespawnCondition?.Invoke();
 	}
 }

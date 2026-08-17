@@ -6,6 +6,7 @@ public class RequireAnyItemCondition : LevelCondition
 {
     [SerializeField] private List<ItemType> itemTypes;
     [SerializeField] private Player player;
+    private bool passedLevel = false;
 
     public override bool CanPassLevel()
     {
@@ -17,10 +18,18 @@ public class RequireAnyItemCondition : LevelCondition
             foreach (IItem item in player.Inventory.Items)
             {
                 if (item.ItemType == type)
+                {
+                    passedLevel = true;
                     return true;
+                }
             }
         }
 
         return false;
+    }
+
+    public override bool PassedLevel()
+    {
+        return passedLevel;
     }
 }

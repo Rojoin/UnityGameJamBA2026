@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class SecurityCamera : MonoBehaviour, ICoverable
+public class SecurityCamera : PlayerRespawnable, ICoverable
 {
     [Header("Player Detection")]
     [SerializeField] private Player player;
@@ -44,7 +44,7 @@ public class SecurityCamera : MonoBehaviour, ICoverable
 
     private bool isPlayerDisguised => player.GetSelectedItem() is Box && (player.GetSelectedItem() as Box).isDisguised;
 
-    public event Action OnPlayerDetected;
+    public Action OnPlayerRespawnCondition { get; set; }
 
     private void Awake()
     {
@@ -125,7 +125,7 @@ public class SecurityCamera : MonoBehaviour, ICoverable
             if (detectionTimer >= detectionDelay && !wasSeeingPlayer)
             {
                 wasSeeingPlayer = true;
-                OnPlayerDetected?.Invoke();
+                OnPlayerRespawnCondition?.Invoke();
             }
         }
         else
