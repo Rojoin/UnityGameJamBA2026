@@ -4,6 +4,7 @@ using UnityEngine;
 public sealed class BombCable : MonoBehaviour, IDamageable
 {
 	[SerializeField] private float health = 1f;
+	[SerializeField] private MeshRenderer meshRenderer;
 
 	public event Action<BombCable> Cut;
 
@@ -24,6 +25,7 @@ public sealed class BombCable : MonoBehaviour, IDamageable
 		{
 			health = 0f;
 			Cut?.Invoke(this);
+			meshRenderer.enabled = false;
 
 			Debug.Log("Cable cut");
 		}
