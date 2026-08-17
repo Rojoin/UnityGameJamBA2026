@@ -67,8 +67,9 @@ public sealed class Pistol : Item
 		Debug.Log("Shoot pistol");
 
 		Ray ray = new Ray(shootPosition.position, shootPosition.forward);
-
-		if (!Physics.Raycast(ray, out RaycastHit hit, range))
+		LayerMask layer = LayerMask.GetMask("Player");
+		
+		if (!Physics.Raycast(ray, out RaycastHit hit, range, ~layer))
 		{
 			return;
 		}

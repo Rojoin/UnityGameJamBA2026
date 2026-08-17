@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 namespace Code.Player
 {
 	[RequireComponent(typeof(CharacterController))]
-	public class Player : MonoBehaviour
+	public class Player : MonoBehaviour , IDamageable
 	{
 		private Inventory inventory;
 
@@ -29,6 +29,7 @@ namespace Code.Player
 		private Vector2 movementInput = new Vector2(0, 0);
 		private CharacterController controller;
 		private Camera camera;
+		public Action OnDeath;
 
 		[SerializeField] private Animator animator;
 		[SerializeField] private Transform handPosition;
@@ -162,5 +163,16 @@ namespace Code.Player
 		{
 			return inventory.GetSelectedItem();
 		}
+
+		public float currentHealth = 100;
+        public float Health => currentHealth;
+        public void TakeDamage(float damage)
+        {
+	        currentHealth-= damage;
+	        if (Health <= 0)
+	        {
+		        OnDeath.Invoke();
+	        }
+        }
 	}
 }

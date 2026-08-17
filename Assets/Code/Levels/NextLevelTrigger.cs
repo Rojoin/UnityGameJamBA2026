@@ -23,6 +23,10 @@ public class NextLevelTrigger : MonoBehaviour
         if (!CanPassLevel())
             return;
 
+        if (!other.CompareTag("Player"))
+        {
+	        return;
+        }
         _levelManager.NextLevel();
         gameObject.SetActive(false);
     }
