@@ -5,7 +5,8 @@ using UnityEngine;
 public class ThrowableItem : MonoBehaviour
 {
 	[SerializeField] public ItemType itemType;
-	private Rigidbody rb;
+	private Rigidbody rb;   
+	public  Action OnItemTake ;
 
 	private void Awake()
 	{
@@ -17,6 +18,7 @@ public class ThrowableItem : MonoBehaviour
 		rb.useGravity = false;
 		rb.isKinematic = true;
 	}
+	
 
 	public void ThrowItem(Vector3 throwForce)
 	{
@@ -24,5 +26,10 @@ public class ThrowableItem : MonoBehaviour
 		rb.isKinematic =false;
 		
 		rb.AddForce(throwForce, ForceMode.Impulse);
+	}
+
+	private void OnDestroy()
+	{
+		OnItemTake = null;
 	}
 }

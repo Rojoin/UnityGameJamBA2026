@@ -39,6 +39,7 @@ public class Hands : Item
 					else
 					{
 						player.AddItemToInventory(ItemFactory.Instance.CreateItem(item.itemType));
+						item.OnItemTake.Invoke();
 						Destroy(hit.collider.gameObject);
 					}
 				}	

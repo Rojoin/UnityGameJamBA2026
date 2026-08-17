@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Code
 {
@@ -26,6 +27,8 @@ namespace Code
 		public float Health => currentHealth;
 		private float MaxHealth = 100f;
 		private float currentHealth;
+
+		public Action OnDeath;
 
 		private void Start()
 		{
@@ -212,12 +215,14 @@ namespace Code
 			if (Health <= 0)
 			{
 				animator.SetBool(IsDead, true);
+				
 				Invoke(nameof(Death),1f);
 			}
 		}
 
 		private void Death()
 		{
+			OnDeath.Invoke();
 			Destroy(this.gameObject);
 		}
 	}
