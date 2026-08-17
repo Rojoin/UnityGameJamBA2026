@@ -30,9 +30,12 @@ namespace Code.Player
 		private CharacterController controller;
 		private Camera camera;
 
+		[SerializeField] private Animator animator;
+		[SerializeField] private Transform handPosition;
+
 		public Inventory Inventory => inventory;
 
-        private void Awake()
+		private void Awake()
 		{
 			controller = GetComponent<CharacterController>();
 			Cursor.lockState = CursorLockMode.Locked;
@@ -48,32 +51,37 @@ namespace Code.Player
 			//TODO: SACAR ESTO PORQUE LA PISTOLA SE RECOGE
 			//inventory.Add(rock);
 
-            clickInputAction.action.performed += OnPrimaryClick;
-            clickInputAction.action.canceled += OnPrimaryClickReleased;
-            secondClickInputAction.action.performed += OnSecondaryClick;
-            secondClickInputAction.action.canceled += OnSecondaryClickReleased;
-            inventoryScrollInputAction.action.performed += OnInventoryScroll;
-            camera = Camera.main;
-        }
+			clickInputAction.action.performed += OnPrimaryClick;
+			clickInputAction.action.canceled += OnPrimaryClickReleased;
+			secondClickInputAction.action.performed += OnSecondaryClick;
+			secondClickInputAction.action.canceled += OnSecondaryClickReleased;
+			inventoryScrollInputAction.action.performed += OnInventoryScroll;
+			camera = Camera.main;
+		}
 
 
-        private void OnSecondaryClickReleased(InputAction.CallbackContext context)
-        {
-            inventory.GetSelectedItem().SecondaryActionReleased();
-        }
+		private void OnSecondaryClickReleased(InputAction.CallbackContext context)
+		{
+			inventory.GetSelectedItem().SecondaryActionReleased();
+		}
 
-        private void OnPrimaryClickReleased(InputAction.CallbackContext context)
-        {
-            inventory.GetSelectedItem().PrimaryActionReleased();
-        }
+		private void OnPrimaryClickReleased(InputAction.CallbackContext context)
+		{
+			inventory.GetSelectedItem().PrimaryActionReleased();
+		}
 
-        private void OnSecondaryClick(InputAction.CallbackContext obj)
-        {
-            inventory.GetSelectedItem().SecondaryAction();
-        }
+		private void OnSecondaryClick(InputAction.CallbackContext obj)
+		{
+			inventory.GetSelectedItem().SecondaryAction();
+		}
 
 		private void OnPrimaryClick(InputAction.CallbackContext obj)
 		{
+			if (inventory.GetSelectedItem().ItemType == ItemType.Pistol)
+			{
+				animator.SetTrigger("Shoot");
+			}
+
 			inventory.GetSelectedItem().PrimaryAction();
 		}
 
@@ -89,6 +97,8 @@ namespace Code.Player
 			{
 				inventory.SelectNext();
 			}
+
+			animator.SetTrigger("ChangeItem");
 		}
 
 		private void OnInventorySlot(InputAction.CallbackContext context)
@@ -118,7 +128,7 @@ namespace Code.Player
 			if (inputCamera != Vector2.zero)
 			{
 				Vector2 inputDir = inputCamera;
-				inputDir *=  Time.deltaTime;
+				inputDir *= Time.deltaTime;
 				xRotation -= inputCamera.y * mouseSensibilityY;
 				xRotation = Mathf.Clamp(xRotation, minAngleX, maxAngleX);
 				transform.Rotate(Vector3.up * (inputDir.x * mouseSensibilityX));
@@ -130,7 +140,7 @@ namespace Code.Player
 		{
 			item.SetPlayer(this);
 			inventory.Add(item);
-			item.transform.SetParent(camera.transform);
+			item.transform.SetParent(handPosition);
 			item.transform.localPosition = Vector3.zero;
 			item.transform.localRotation = Quaternion.identity;
 			item.transform.localScale = Vector3.one;
@@ -143,14 +153,14 @@ namespace Code.Player
 			clickInputAction.action.Disable();
 			secondClickInputAction.action.Disable();
 
-            clickInputAction.action.performed -= OnPrimaryClick;
-            secondClickInputAction.action.performed -= OnSecondaryClick;
-            inventoryScrollInputAction.action.performed -= OnInventoryScroll;
-        }
+			clickInputAction.action.performed -= OnPrimaryClick;
+			secondClickInputAction.action.performed -= OnSecondaryClick;
+			inventoryScrollInputAction.action.performed -= OnInventoryScroll;
+		}
 
-        public IItem GetSelectedItem()
-        {
-            return inventory.GetSelectedItem();
-        }
-    }
+		public IItem GetSelectedItem()
+		{
+			return inventory.GetSelectedItem();
+		}
+	}
 }
