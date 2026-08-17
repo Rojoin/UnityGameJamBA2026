@@ -80,4 +80,9 @@ public sealed class Scissors : Item
 		attackCollider.enabled = false;
 		isAttacking = false;
 	}
+    
+    public override void Release()
+    {
+        
+    }
 }

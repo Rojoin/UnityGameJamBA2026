@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 155466293}
   - component: {fileID: 155466292}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: cam-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2848,6 +2848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1048716735}
   - component: {fileID: 1048716736}
+  - component: {fileID: 1048716737}
   m_Layer: 0
   m_Name: camera
   m_TagString: Untagged
@@ -2899,6 +2900,27 @@ MonoBehaviour:
   dodgeMaxAngle: 45
   dodgePauseTime: 0.1
   dodgeDuration: 0.6
+--- !u!135 &1048716737
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048716734}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.4484394
+  m_Center: {x: 1.0968473, y: 1.7792124, z: -0.000020049023}
 --- !u!1 &1085009357
 GameObject:
   m_ObjectHideFlags: 0
@@ -4487,6 +4509,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6471648024750411052, guid: 6424c6c16421fa34391c538ff27bb974, type: 3}
   m_PrefabInstance: {fileID: 1818471228}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1521363709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1521363710}
+  m_Layer: 0
+  m_Name: CoverPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1521363710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521363709}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.41, y: 0, z: 1.45}
+  m_LocalScale: {x: 1, y: 1, z: 0.25721}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1515778965}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1530896147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5862,6 +5915,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4587269878814837074, guid: 6424c6c16421fa34391c538ff27bb974, type: 3}
+      propertyPath: paper
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587269878814837074, guid: 6424c6c16421fa34391c538ff27bb974, type: 3}
+      propertyPath: shield
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587269878814837074, guid: 6424c6c16421fa34391c538ff27bb974, type: 3}
       propertyPath: mouseSensibilityX
       value: 50
       objectReference: {fileID: 0}
@@ -5931,6 +5992,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6471648024750411052, guid: 6424c6c16421fa34391c538ff27bb974, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1085009358}
+    - targetCorrespondingSourceObject: {fileID: 6471648024750411052, guid: 6424c6c16421fa34391c538ff27bb974, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1521363710}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6424c6c16421fa34391c538ff27bb974, type: 3}
 --- !u!1 &1858103390
@@ -6140,7 +6204,7 @@ GameObject:
   - component: {fileID: 1900662324}
   - component: {fileID: 1900662323}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: cam-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

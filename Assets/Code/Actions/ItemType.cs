@@ -1,4 +1,5 @@
 using Code.Player;
+using System;
 using UnityEngine;
 
 public enum ItemType
@@ -16,6 +17,7 @@ public enum ItemType
 public interface IItem
 {
     ItemType ItemType { get; }
+    public Action<IItem> OnItemReleased { get; set; }
 
     void Activate();
     void Deactivate();
@@ -29,6 +31,8 @@ public abstract class Item : MonoBehaviour, IItem
 {
     public abstract ItemType ItemType { get; }
 
+    public Action<IItem> OnItemReleased { get; set; }
+
     public abstract void Activate();
     public abstract void Deactivate();
 
@@ -36,6 +40,8 @@ public abstract class Item : MonoBehaviour, IItem
     public abstract void PrimaryActionReleased();
     public abstract void SecondaryAction();
     public abstract void SecondaryActionReleased();
+    public abstract void Release();
+
     protected Player player;
 
     public void SetPlayer(Player player)
