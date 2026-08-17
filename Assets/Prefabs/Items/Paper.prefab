@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1379631603051873963}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.72, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.4325, y: 0.062546045, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.45251745, y: 3.4476006, z: 0.35607433}
+  m_Center: {x: 0.00701348, y: 1.2238005, z: 0.0023384094}
 --- !u!1 &2862670600310337630
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   paperGO: {fileID: 1379631603051873963}
   airplaneGO: {fileID: 2862670600310337630}
   coverRange: 10
-  playerViewOrigin: {fileID: 0}
+  playerViewOrigin: {fileID: 4472514856717605217}
   drawRangeGizmos: 1
 --- !u!1001 &4150957582287257226
 PrefabInstance:
@@ -232,7 +232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 010f547a5c9f3be4ca2221fe19c51483, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.51152
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 010f547a5c9f3be4ca2221fe19c51483, type: 3}
       propertyPath: m_LocalPosition.z

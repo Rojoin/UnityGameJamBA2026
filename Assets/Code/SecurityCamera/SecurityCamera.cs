@@ -122,7 +122,7 @@ public class SecurityCamera : PlayerRespawnable, ICoverable
                 Debug.Log("Camera sees player");
             }
 
-            if (detectionTimer >= detectionDelay && !wasSeeingPlayer)
+            if (detectionTimer >= detectionDelay && wasSeeingPlayer)
             {
                 wasSeeingPlayer = true;
                 OnPlayerRespawnCondition?.Invoke();

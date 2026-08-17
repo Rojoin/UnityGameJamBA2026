@@ -10,7 +10,10 @@ public class PlayerRespawn : MonoBehaviour
     private void Awake()
     {
         foreach (PlayerRespawnable respawnable in playerRespawnables)
+        {
+            Debug.Log("Respawn condition");
             respawnable.OnPlayerRespawnCondition += RespawnPlayer;
+        }
     }
 
     private void RespawnPlayer()

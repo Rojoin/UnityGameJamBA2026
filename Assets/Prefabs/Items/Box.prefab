@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Box
   hand: {fileID: 0}
   hidePosition: {fileID: 0}
-  boxGO: {fileID: 0}
+  boxGO: {fileID: 96431032684121651}
 --- !u!1001 &979531074474029922
 PrefabInstance:
   m_ObjectHideFlags: 0
