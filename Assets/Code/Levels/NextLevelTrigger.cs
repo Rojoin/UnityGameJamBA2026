@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 public class NextLevelTrigger : MonoBehaviour
 {
     [SerializeField] private LevelManager _levelManager;
+    [SerializeField] private List<LevelCondition> _levelConditions;
     private BoxCollider _boxCollider;
 
     private void Awake()
@@ -18,7 +20,21 @@ public class NextLevelTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!CanPassLevel())
+            return;
+
         _levelManager.NextLevel();
         gameObject.SetActive(false);
+    }
+
+    private bool CanPassLevel()
+    {
+        foreach (LevelCondition level in _levelConditions)
+        {
+            if (!level.CanPassLevel())
+                return false;
+        }
+
+        return true;
     }
 }

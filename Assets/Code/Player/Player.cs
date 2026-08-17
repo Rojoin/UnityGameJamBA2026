@@ -30,7 +30,9 @@ namespace Code.Player
 		private CharacterController controller;
 		private Camera camera;
 
-		private void Awake()
+		public Inventory Inventory => inventory;
+
+        private void Awake()
 		{
 			controller = GetComponent<CharacterController>();
 			Cursor.lockState = CursorLockMode.Locked;
@@ -53,6 +55,7 @@ namespace Code.Player
             inventoryScrollInputAction.action.performed += OnInventoryScroll;
             camera = Camera.main;
         }
+
 
         private void OnSecondaryClickReleased(InputAction.CallbackContext context)
         {

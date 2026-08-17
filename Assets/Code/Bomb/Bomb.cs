@@ -10,17 +10,23 @@ public sealed class Bomb : MonoBehaviour
 	private bool isActive;
 	private bool isDefused;
 
-	private void Awake()
+	public bool IsDefused => isDefused;
+
+    private void Awake()
 	{
 		for (int i = 0; i < cables.Count; i++)
 		{
 			cables[i].Cut += OnCableCut;
 		}
 		
-		StartBomb();
 	}
 
-	private void OnDestroy()
+    private void OnTriggerEnter(Collider other)
+    {
+		StartBomb();
+    }
+
+    private void OnDestroy()
 	{
 		for (int i = 0; i < cables.Count; i++)
 		{
@@ -30,7 +36,7 @@ public sealed class Bomb : MonoBehaviour
 
 	public void StartBomb()
 	{
-		if (isActive || isDefused)
+		if (isActive || IsDefused)
 		{
 			return;
 		}
@@ -46,7 +52,7 @@ public sealed class Bomb : MonoBehaviour
 
 		yield return new WaitForSeconds(countdown);
 
-		if (!isDefused)
+		if (!IsDefused)
 		{
 			Explode();
 		}
@@ -54,7 +60,7 @@ public sealed class Bomb : MonoBehaviour
 
 	private void OnCableCut(BombCable cable)
 	{
-		if (!isActive || isDefused)
+		if (!isActive || IsDefused)
 		{
 			return;
 		}
