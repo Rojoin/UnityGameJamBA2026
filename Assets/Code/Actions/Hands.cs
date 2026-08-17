@@ -1,11 +1,14 @@
+using System;
 using Code.Player;
 using UnityEngine;
 
 public class Hands : Item
 {
 	public override ItemType ItemType => ItemType.Hands;
-	public GameObject currentlyHoldingObject;
+	public ThrowableItem currentlyHoldingObject;
+	public Transform itemHolder;
 	[SerializeField] private float radius;
+	[SerializeField] private float throwForce;
 	public override void Activate()
 	{
 
@@ -21,13 +24,17 @@ public class Hands : Item
 
 		if (currentlyHoldingObject == null)
 		{
-			if (Physics.SphereCast(transform.position + transform.forward,radius, transform.forward, out RaycastHit hit ))
+			if (Physics.Raycast(transform.position, transform.forward * radius, out RaycastHit hit ))
 			{
+				Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.red);
 				if (hit.collider.TryGetComponent(out ThrowableItem item))
 				{
 					if (item.itemType == ItemType.None)
 					{
-						currentlyHoldingObject = hit.collider.gameObject;
+						currentlyHoldingObject = item;
+						currentlyHoldingObject.Take();
+						currentlyHoldingObject.transform.SetParent(itemHolder);
+						currentlyHoldingObject.transform.localPosition = Vector3.zero;
 					}
 					else
 					{
@@ -36,8 +43,12 @@ public class Hands : Item
 					}
 				}	
 			}
-
-			
+		}
+		else
+		{
+			currentlyHoldingObject.transform.SetParent(null);
+			currentlyHoldingObject.ThrowItem(Vector3.up+ transform.forward *throwForce);
+			currentlyHoldingObject = null;
 		}
 		
 	}
@@ -49,11 +60,16 @@ public class Hands : Item
 
     public override void SecondaryAction()
 	{
-		// Drop or throw held object
 	}
 
     public override void SecondaryActionReleased()
     {
 
+    }
+
+    private void OnDrawGizmos()
+    {
+	    Gizmos.color = Color.red;
+		Gizmos.DrawSphere(transform.position + transform.forward,radius);
     }
 }

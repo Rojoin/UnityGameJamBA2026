@@ -129,6 +129,8 @@ namespace Code.Player
 			inventory.Add(item);
 			item.transform.SetParent(camera.transform);
 			item.transform.localPosition = Vector3.zero;
+			item.transform.localRotation = Quaternion.identity;
+			item.transform.localScale = Vector3.one;
 		}
 
 		private void OnDestroy()
