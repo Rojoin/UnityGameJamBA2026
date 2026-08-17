@@ -32,6 +32,7 @@ namespace Code.Player
 
 		[SerializeField] private Animator animator;
 		[SerializeField] private Transform handPosition;
+		[SerializeField] private Transform ShootPosition;
 
 		public Inventory Inventory => inventory;
 
@@ -144,6 +145,11 @@ namespace Code.Player
 			item.transform.localPosition = Vector3.zero;
 			item.transform.localRotation = Quaternion.identity;
 			item.transform.localScale = Vector3.one;
+
+			if (item is Pistol pistol)
+			{
+				pistol.shootPosition = ShootPosition;
+			}
 		}
 
 		private void OnDestroy()

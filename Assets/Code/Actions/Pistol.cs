@@ -10,7 +10,7 @@ public sealed class Pistol : Item
 	[SerializeField] private float reloadTime = 1f;
 	[SerializeField] private float range = 100f;
 	[SerializeField] private float damage = 10f;
-	[SerializeField] private Transform shootPosition;
+	public Transform shootPosition;
 	[SerializeField] private GameObject pistolVisual;
 
 	private int currentAmmo;

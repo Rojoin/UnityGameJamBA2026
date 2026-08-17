@@ -309,6 +309,7 @@ MonoBehaviour:
   mouseSensibilityY: 0.2
   animator: {fileID: 4904499408218835647}
   handPosition: {fileID: 2696824114976717661}
+  ShootPosition: {fileID: 6074705331159335652}
 --- !u!1 &8220009806529599220
 GameObject:
   m_ObjectHideFlags: 0
